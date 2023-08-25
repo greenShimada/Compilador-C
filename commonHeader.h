@@ -23,8 +23,8 @@ typedef struct
 {
    TokenType type;
    char value;
+   int tokenVal;
    int line;
-   char lexame[100];
 }Token;
 
 #endif

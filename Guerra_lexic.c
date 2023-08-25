@@ -25,8 +25,9 @@ Token Guerra_analyser(FILE *arquivo)
             }
             ungetc(activeChar, arquivo);
             
+            activeToken.tokenVal = value;
             activeToken.type = TOKEN_NUMBER;
-            activeToken.value = value;
+          
             return activeToken;
         }
         else if (activeChar == '*' || activeChar == '/')

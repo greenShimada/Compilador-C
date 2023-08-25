@@ -20,8 +20,6 @@ void reconhecer(int tok) {
 	  erro(token.line);   
 }
 
-// implementar aqui
-
 int main() {
 
   file = fopen("codigo.txt", "r");
@@ -39,7 +37,7 @@ int main() {
         }
       E();
       if (token.type != TOKEN_ENDLINE) erro(token.line);
-      printf("\n tipo de token = %d\n", token.type);
+      printf("\n tipo de token = %d\n\t", token.type);
     }
   }
 }
