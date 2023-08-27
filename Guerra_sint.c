@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "lexicHeader.h"
 #include "sintaticHeader.h"
+#include "pilha.h"
 
 Token token;
 FILE *file;
@@ -37,7 +38,7 @@ int main() {
         }
       E();
       if (token.type != TOKEN_ENDLINE) erro(token.line);
-      printf("\n tipo de token = %d\n\t", token.type);
+      printf("\n resultado da operacao = %d\n\t", topo());
     }
   }
 }
@@ -57,6 +58,8 @@ void E_linha(){
    
     reconhecer(TOKEN_OPERATOR_BASIC);
     T();
+    printf("%c", token.value);
+    executaCalculo(token.value);
     E_linha();
   }
   else ;
@@ -67,7 +70,7 @@ void T_linha(){
   
   if (token.type == TOKEN_OPERATOR){
    
-    reconhecer(TOKEN_OPERATOR);
+    reconhecer(TOKEN_OPERATOR);    
     F();
     T_linha();
   }
@@ -88,8 +91,33 @@ void F(){
   }
 
   else if (token.type == TOKEN_NUMBER){
+    printf("%d", token.value);
+    push(token.value);
     reconhecer(TOKEN_NUMBER);
   }
   else;
 }
 
+void executaCalculo(char operador){
+  a = pop();
+  b = pop();
+  switch (operador)
+  {
+    case '+':
+      printf("%c", token.value);
+      push(b+a);
+      break;
+    case '-':
+      printf("%c", token.value);
+      push(b-a);
+      break;
+    case '*':
+      printf("%c", token.value);
+      push(b*a);
+      break;
+    case '/':
+      printf("%c", token.value);
+      push(b/a);
+      break;
+  }
+}

@@ -23,8 +23,7 @@ Token Guerra_analyser(FILE *arquivo)
                 value = value * 10 + (activeChar - '0');
                 activeChar = getc(arquivo);
             }
-            ungetc(activeChar, arquivo);
-            
+            ungetc(activeChar, arquivo); 
             activeToken.tokenVal = value;
             activeToken.type = TOKEN_NUMBER;
           

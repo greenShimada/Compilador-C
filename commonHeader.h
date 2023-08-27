@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+
 typedef enum
 {
     TOKEN_NUMBER,            //0
@@ -22,8 +23,8 @@ typedef enum
 typedef struct 
 {
    TokenType type;
-   char value;
    int tokenVal;
+   char value;
    int line;
 }Token;
 
