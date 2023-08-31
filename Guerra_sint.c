@@ -14,7 +14,7 @@ void erro(int line) {
 }
 
 void reconhecer(int tok) {
-  printf("\n tipo de token = %d\n", token.type);
+  //printf("\n tipo de token = %d\n", token.type);
 	if (tok == token.type)
 	  token = Guerra_analyser(file);
 	else 
@@ -56,10 +56,10 @@ void T(){
 void E_linha(){
   if (token.type == TOKEN_OPERATOR_BASIC){
    
+    char opAux = token.value;
     reconhecer(TOKEN_OPERATOR_BASIC);
     T();
-    printf("%c", token.value);
-    executaCalculo(token.value);
+    executaCalculo(opAux);
     E_linha();
   }
   else ;
@@ -69,9 +69,11 @@ void E_linha(){
 void T_linha(){
   
   if (token.type == TOKEN_OPERATOR){
-   
+    char opAux = token.value;
     reconhecer(TOKEN_OPERATOR);    
     F();
+    
+    executaCalculo(opAux);
     T_linha();
   }
   else;
@@ -91,33 +93,32 @@ void F(){
   }
 
   else if (token.type == TOKEN_NUMBER){
-    printf("%d", token.value);
-    push(token.value);
+    printf("%d", token.tokenVal);
+    push(token.tokenVal);
     reconhecer(TOKEN_NUMBER);
   }
   else;
 }
 
-void executaCalculo(char operador){
-  a = pop();
-  b = pop();
-  switch (operador)
-  {
+void executaCalculo(char operator)
+{
+    int a, b;
+    a = pop();
+    b = pop();
+    printf("%c ", operator);
+    switch (operator)
+    {
     case '+':
-      printf("%c", token.value);
-      push(b+a);
-      break;
+        push(a + b);
+        break;
     case '-':
-      printf("%c", token.value);
-      push(b-a);
-      break;
+        push(b - a);
+        break;
     case '*':
-      printf("%c", token.value);
-      push(b*a);
-      break;
+        push(a * b);
+        break;
     case '/':
-      printf("%c", token.value);
-      push(b/a);
-      break;
-  }
+        push(b / a);
+        break;
+    }
 }

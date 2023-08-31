@@ -1,20 +1,21 @@
 #ifndef PILHA_HEADER_H
 #define PILHA_HEADER_H
 
-#define MAX 10000
+#define MAX 1000
 
-int vetorPilha[MAX];
-int a, b;
-int tam = 0;
+int PILHA[MAX];
+int size = 0;
 
 int pop(){
-    return vetorPilha[--tam];
+    return PILHA[--size];
 }
-void push(int a){
-    vetorPilha[tam++] = a;
+
+void push(int value){
+    PILHA[size++] = value;
 }
+
 int topo(){
-    return vetorPilha[tam];
+    return PILHA[size - 1];
 }
 
 #endif
