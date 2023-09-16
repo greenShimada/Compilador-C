@@ -14,7 +14,6 @@ void erro(int line) {
 }
 
 void reconhecer(int tok) {
-  //printf("\n tipo de token = %d\n", token.type);
 	if (tok == token.type)
 	  token = Guerra_analyser(file);
 	else 
