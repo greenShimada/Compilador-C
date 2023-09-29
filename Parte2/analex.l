@@ -42,7 +42,7 @@ int yyerror(char *s) {
 [0-9]+("."[0-9]+)?   { return NUM; }
 [a-zA-Z][a-zA-Z0-9]*   { insere(yytext); return ID; }
 \        { ; }
-\n       { line++; printf("\npulou linha\n");}     
+\n       { line++;}     
 \t       { ; }
 "##".*\n { }             
 .        { yyerror("illegal token"); }
