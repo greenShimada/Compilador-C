@@ -1,0 +1,14 @@
+char a = 10;
+if (a > 10) 
+  a = 3;
+end if
+
+function 
+b
+(a, 
+3, 
+4)
+{
+  a = 3;
+  print b;
+};

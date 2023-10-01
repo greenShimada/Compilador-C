@@ -1,6 +1,6 @@
 %{
 #include <stdio.h>
-#include "tokens.h" 
+#include "sint.h" 
 #include "tabsimb.h" 
 int line=1;
 int yyerror(char *s) { 
@@ -8,6 +8,8 @@ int yyerror(char *s) {
 }
 %}
 %%
+"function" {return FUNCTION;}
+"end if" {return ENDIF;}
 "print" {return PRINT;}
 "println" {return PRINTLN;}
 "read" {return READ;}
@@ -51,15 +53,6 @@ int yyerror(char *s) {
 int yywrap() { return 1; }
 #endif
 
-void main(int argc, char** argv) {
-int token;	
-	yyin = fopen(argv[1],"r");
-	token = yylex();
-	while(token) {
-		printf("%d -> %s\n", token, yytext);
-		token = yylex(); 
-	}
-	imprime();
-}
+
 
 
