@@ -2,6 +2,7 @@
 #include "lex.yy.c" 
 %}
 
+%token RETURN
 %token FUNCTION
 %token ENDIF
 %token PRINT
@@ -53,20 +54,26 @@ Statement:
 	|	PRINTLN Exp ';' '\n'
 	|	READ INTEGER
 	| 	Function_Statement
+	| 	RETURN Exp ';'
 	;
 
-Function_Statement: FUNCTION ID '(' Args ')' Compound_Statement ';'
+Tipo:
+	 INTEGER 
+	| CHAR
+	;
+
+Function_Statement: FUNCTION Tipo ID '(' Args ')' Compound_Statement 
 	;
 	
 Atribuicao : ID '=' Exp ';' 
 	| INTEGER ID '=' Exp ';'
 	| CHAR ID '=' Exp ';'
-
 	;
 
 Compound_Statement :
 	  Statement
 	| '{' Statement_Seq '}'
+	
 	;
 	
 If_Statement:

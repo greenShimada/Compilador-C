@@ -54,26 +54,27 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    FUNCTION = 258,                /* FUNCTION  */
-    ENDIF = 259,                   /* ENDIF  */
-    PRINT = 260,                   /* PRINT  */
-    PRINTLN = 261,                 /* PRINTLN  */
-    READ = 262,                    /* READ  */
-    CHAR = 263,                    /* CHAR  */
-    NOT = 264,                     /* NOT  */
-    NUM = 265,                     /* NUM  */
-    ID = 266,                      /* ID  */
-    AND = 267,                     /* AND  */
-    OR = 268,                      /* OR  */
-    EQ = 269,                      /* EQ  */
-    LE = 270,                      /* LE  */
-    GE = 271,                      /* GE  */
-    NE = 272,                      /* NE  */
-    IF = 273,                      /* IF  */
-    WHILE = 274,                   /* WHILE  */
-    ELSE = 275,                    /* ELSE  */
-    DO = 276,                      /* DO  */
-    INTEGER = 277                  /* INTEGER  */
+    RETURN = 258,                  /* RETURN  */
+    FUNCTION = 259,                /* FUNCTION  */
+    ENDIF = 260,                   /* ENDIF  */
+    PRINT = 261,                   /* PRINT  */
+    PRINTLN = 262,                 /* PRINTLN  */
+    READ = 263,                    /* READ  */
+    CHAR = 264,                    /* CHAR  */
+    NOT = 265,                     /* NOT  */
+    NUM = 266,                     /* NUM  */
+    ID = 267,                      /* ID  */
+    AND = 268,                     /* AND  */
+    OR = 269,                      /* OR  */
+    EQ = 270,                      /* EQ  */
+    LE = 271,                      /* LE  */
+    GE = 272,                      /* GE  */
+    NE = 273,                      /* NE  */
+    IF = 274,                      /* IF  */
+    WHILE = 275,                   /* WHILE  */
+    ELSE = 276,                    /* ELSE  */
+    DO = 277,                      /* DO  */
+    INTEGER = 278                  /* INTEGER  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -82,26 +83,27 @@ extern int yydebug;
 #define YYEOF 0
 #define YYerror 256
 #define YYUNDEF 257
-#define FUNCTION 258
-#define ENDIF 259
-#define PRINT 260
-#define PRINTLN 261
-#define READ 262
-#define CHAR 263
-#define NOT 264
-#define NUM 265
-#define ID 266
-#define AND 267
-#define OR 268
-#define EQ 269
-#define LE 270
-#define GE 271
-#define NE 272
-#define IF 273
-#define WHILE 274
-#define ELSE 275
-#define DO 276
-#define INTEGER 277
+#define RETURN 258
+#define FUNCTION 259
+#define ENDIF 260
+#define PRINT 261
+#define PRINTLN 262
+#define READ 263
+#define CHAR 264
+#define NOT 265
+#define NUM 266
+#define ID 267
+#define AND 268
+#define OR 269
+#define EQ 270
+#define LE 271
+#define GE 272
+#define NE 273
+#define IF 274
+#define WHILE 275
+#define ELSE 276
+#define DO 277
+#define INTEGER 278
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
