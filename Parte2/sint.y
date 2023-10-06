@@ -1,9 +1,8 @@
 %{ 
 #include "lex.yy.c" 
 %}
-
+%token LET
 %token RETURN
-%token FUNCTION
 %token ENDIF
 %token PRINT
 %token PRINTLN
@@ -29,7 +28,8 @@
 %left '*' '/'
 %start Prog
 %%
-Prog : Statement_Seq
+Prog : let_Statement Prog
+	| let_Statement
 	;
 	
 	
@@ -53,16 +53,23 @@ Statement:
 	|   PRINT Exp ';'
 	|	PRINTLN Exp ';' '\n'
 	|	READ INTEGER
-	| 	Function_Statement
+	| 	let_Statement
 	| 	RETURN Exp ';'
 	;
 
 Tipo:
 	 INTEGER 
 	| CHAR
+	|
 	;
 
-Function_Statement: FUNCTION Tipo ID '(' Args ')' Compound_Statement 
+Type_Seq:
+	  Tipo ID 
+	| Tipo ID ',' Type_Seq 
+	|
+	;
+
+let_Statement: LET Tipo ID '(' Type_Seq ')' '{' Statement_Seq '}'
 	;
 	
 Atribuicao : ID '=' Exp ';' 

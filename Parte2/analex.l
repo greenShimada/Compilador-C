@@ -9,7 +9,7 @@ int yyerror(char *s) {
 %}
 %%
 "return" {return RETURN;}
-"function" {return FUNCTION;}
+"let" {return LET;}
 "end if" {return ENDIF;}
 "print" {return PRINT;}
 "println" {return PRINTLN;}

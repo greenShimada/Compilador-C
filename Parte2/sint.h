@@ -54,8 +54,8 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    RETURN = 258,                  /* RETURN  */
-    FUNCTION = 259,                /* FUNCTION  */
+    LET = 258,                     /* LET  */
+    RETURN = 259,                  /* RETURN  */
     ENDIF = 260,                   /* ENDIF  */
     PRINT = 261,                   /* PRINT  */
     PRINTLN = 262,                 /* PRINTLN  */
@@ -83,8 +83,8 @@ extern int yydebug;
 #define YYEOF 0
 #define YYerror 256
 #define YYUNDEF 257
-#define RETURN 258
-#define FUNCTION 259
+#define LET 258
+#define RETURN 259
 #define ENDIF 260
 #define PRINT 261
 #define PRINTLN 262

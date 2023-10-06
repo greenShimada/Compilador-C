@@ -1,16 +1,4 @@
-char a = 10;
-
-if (a > 10) 
-  a = 3;
-end if
-
-function 
-char
-b
-(a, 
-3, 
-4)
-{
-  a = 3;
-  print b;
+let integer teste(integer a){
+  a = a + 10;
+  char b = 3;
 }
