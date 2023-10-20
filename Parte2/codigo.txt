@@ -2,3 +2,9 @@ let integer teste(integer a){
   a = a + 10;
   char b = 3;
 }
+let char teste2(char b){
+  a = b;
+}
+let integer teste3(){
+
+}
