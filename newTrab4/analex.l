@@ -1,32 +1,28 @@
 %{
 #include <stdio.h>
-#include "sint.h" 
 #include "tabsimb.h" 
+#include "mycomp.h"
 int line=1;
 int yyerror(char *s) { 
   fprintf(stderr, "%s na linha %d\n",s,line); 
 }
 %}
 %%
-"return" {return RETURN;}
-"let" {return LET;}
-"end if" {return ENDIF;}
-"print" {return PRINT;}
-"println" {return PRINTLN;}
-"read" {return READ;}
 "if"  { return IF; }
 "else" { return ELSE;}
 "while" { return WHILE;}
-"char" { return CHAR;}
 "do"  { return DO;}
-"integer" { return INTEGER;}
+"int" { return INT;}
+"char" {return CHAR;}
+"void" {return VOID;}
+"read" {return READ;}
+"print" {return PRINT;}
+"println" {return PRINTLN;}
 ">="  { return GE;}
 "<="  { return LE;}
 "=="  { return EQ;}
-"<>"  { return NE;}
-"or"  { return OR;}
-"and" { return AND;}
-"not"   { return NOT;}
+"!="  { return NE;}
+"!"   { return NOT;}
 ">"   { return '>';}
 "<"   { return '<';}
 "="   { return '='; }
@@ -40,20 +36,17 @@ int yyerror(char *s) {
 "{"   { return '{'; }
 "}"   { return '}'; }
 ","   { return ','; }
-
-
-[0-9]+("."[0-9]+)?   { return NUM; }
-[a-zA-Z][a-zA-Z0-9]*   { insere(yytext); return ID; }
+[0-9]+("."[0-9]+)?   { yylval.place = atoi(yytext); return NUM; }
+[a-zA-Z][a-zA-Z0-9]*   { yylval.place = insere(yytext); return ID; }
 \        { ; }
-\n       { line++;}     
+\n       { line++; }     
 \t       { ; }
-"##".*\n { }             
+"//".*\n { }             
 .        { yyerror("illegal token"); }
 %%
 #ifndef yywrap
 int yywrap() { return 1; }
 #endif
-
 
 
 
