@@ -35,6 +35,19 @@ char name_orig[5];
 	insert_cod(&Atrib->code,instrucao);
 }
 
+/*void La(struct no *Exp, struct no $2, int reg1){
+char name_dest[5];
+char name_orig[5];
+	getName($2.place,name_dest);
+	getName($3.place,name_orig);
+
+	sprintf(instrucao,"\tmove %s,%s\n",name_dest,name_orig);
+	create_cod(&Atrib->code);
+	insert_cod(&Atrib->code,$3.code);
+	insert_cod(&Atrib->code,instrucao);
+
+
+}*/
 /* modificado */
 void Li(struct no *Exp, int num) {
 char name_dest[5];
@@ -70,17 +83,23 @@ char name_temp[5];
 	printf("L%d:",Label);
 }
 
-void Println(int reg) {
+void Println(struct no *reg) {
 char name_reg[10];
 	printf("\tli $v0, 1\n");
-	getName(reg,name_reg);
+	getName(reg->place,name_reg);
 	printf("\tmove $a0,%s\n", name_reg);
 	printf("\tsyscall\n");
 	printf("\tli $v0,11\n"); 
    	printf("\tli $a0,'\\n'\n"); 
     printf("\tsyscall\n"); 
 }
-
+void Print(struct no *reg) {
+char name_reg[10];
+	printf("\tli $v0, 1\n");
+	getName(reg->place,name_reg);
+	printf("\tmove $a0,%s\n", name_reg);
+	printf("\tsyscall\n"); 
+}
 void Read(int reg) {
 char name_reg[10];
 	printf("\tli $v0, 5\n");

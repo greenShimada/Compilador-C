@@ -1,7 +1,6 @@
 .text
-	li $t0,550
+	li $t0,30
 	move $s1,$t0
-	li $t1,30
-	move $s2,$t1
-	li $t2,40
-	move $s3,$t2
+	li $v0, 1
+	move $a0,$s1
+	syscall

@@ -97,8 +97,8 @@ Statement:
 	| 	While_Statement
 	|   Do_While_Statement
 	|   ID '(' Args ')' ';'
-	|	PRINT '(' Exp ')' ';' 
-	|   PRINTLN '(' Exp ')' ';' { /*Println($3);*/}
+	|	PRINT '(' Exp ')' ';'  { Print(&$3);}
+	|   PRINTLN '(' Exp ')' ';' { Println(&$3);}
 	|   ID '=' READ '(' ')' ';' { /* Read($1); */ }
 	;
 	
@@ -143,7 +143,7 @@ Exp : Exp '+' Exp  { /* $$ = newTemp(); ExpAri("add",$$,$1,$3); */}
 	| '(' Exp ')'  { }
 	| NUM	  {  $$.place = newTemp(); Li(&$$,$1); } 
 				 		   
-	| ID      {  	}     
+	| ID      {    }     
 	;   
 	
 %%  
@@ -152,7 +152,6 @@ int main(int argc, char **argv) {
   printf(".text\n");
   yyin = fopen(argv[1],"r");
   yyparse();
-    
 } 
 
 

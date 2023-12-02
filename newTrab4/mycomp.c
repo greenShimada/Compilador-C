@@ -1204,50 +1204,56 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
+  case 29: /* Statement: PRINT '(' Exp ')' ';'  */
+#line 100 "mycomp.y"
+                                       { Print(&(yyvsp[-2].node));}
+#line 1211 "mycomp.c"
+    break;
+
   case 30: /* Statement: PRINTLN '(' Exp ')' ';'  */
 #line 101 "mycomp.y"
-                                    { /*Println($3);*/}
-#line 1211 "mycomp.c"
+                                    { Println(&(yyvsp[-2].node));}
+#line 1217 "mycomp.c"
     break;
 
   case 31: /* Statement: ID '=' READ '(' ')' ';'  */
 #line 102 "mycomp.y"
                                     { /* Read($1); */ }
-#line 1217 "mycomp.c"
+#line 1223 "mycomp.c"
     break;
 
   case 32: /* Atribuicao: ID '=' Exp ';'  */
 #line 106 "mycomp.y"
                              { Atrib(&(yyval.node),(yyvsp[-3].place),(yyvsp[-1].node)); printf("%s", (yyval.node).code);}
-#line 1223 "mycomp.c"
+#line 1229 "mycomp.c"
     break;
 
   case 40: /* Exp: Exp '+' Exp  */
 #line 131 "mycomp.y"
                    { /* $$ = newTemp(); ExpAri("add",$$,$1,$3); */}
-#line 1229 "mycomp.c"
+#line 1235 "mycomp.c"
     break;
 
   case 52: /* Exp: '(' Exp ')'  */
 #line 143 "mycomp.y"
                        { }
-#line 1235 "mycomp.c"
+#line 1241 "mycomp.c"
     break;
 
   case 53: /* Exp: NUM  */
 #line 144 "mycomp.y"
                   {  (yyval.node).place = newTemp(); Li(&(yyval.node),(yyvsp[0].place)); }
-#line 1241 "mycomp.c"
+#line 1247 "mycomp.c"
     break;
 
   case 54: /* Exp: ID  */
 #line 146 "mycomp.y"
-                  {  	}
-#line 1247 "mycomp.c"
+                  {    }
+#line 1253 "mycomp.c"
     break;
 
 
-#line 1251 "mycomp.c"
+#line 1257 "mycomp.c"
 
       default: break;
     }
@@ -1447,7 +1453,6 @@ int main(int argc, char **argv) {
   printf(".text\n");
   yyin = fopen(argv[1],"r");
   yyparse();
-    
 } 
 
 
