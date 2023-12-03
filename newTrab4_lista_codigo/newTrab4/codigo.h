@@ -87,9 +87,6 @@ char name_temp[5];
 	insert_cod(&Exp->code,instrucao);
 }
 
-void FunctionCall(struct no *Function, struct no Arguments, struct no Body){
-	printf("This is a function");
-}
 void Println(struct no *Print, struct no Exp) {
 // falta adaptar a lista de codigos		
 char name_reg[10];

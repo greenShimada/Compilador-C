@@ -1,10 +1,5 @@
 main() {
-	int b;
-	b = a();
+	int a,b,c,aux;
+    a = 10;
 
-}
-int a(){
-	int c;
-	c = 10;
-	print(c);
 }

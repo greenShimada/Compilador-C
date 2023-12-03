@@ -35,7 +35,7 @@
 
 %type <node> Exp Atribuicao Compound_Statement
 %type <node> Statement Statement_Seq If_Statement
-%type <node> Funcao
+
 
 %start Prog
 %%
@@ -44,7 +44,7 @@ Prog : Funcao
 	;
 	
 Funcao:
-    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { FunctionCall(&$$, $3, $6)}
+    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { printf("%s", $8.code);}
    ;
    
 Declps :
