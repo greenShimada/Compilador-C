@@ -3,12 +3,12 @@ main() {
 	int a,b,c,aux;
     a = 10;
 	b = 30;
-	println(a);
+	print(a);
 	t();
-	println(b);
+	print(b);
 }
 t(){
 	int c;
 	c = 20;
-	println(c);
+	print(c);
 }

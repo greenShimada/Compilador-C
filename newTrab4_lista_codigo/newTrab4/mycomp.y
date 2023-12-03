@@ -49,7 +49,7 @@ Funcao:
 		char label[10];
 		lblNumber = newLabel();
 		sprintf(label, "L%d:",lblNumber );
-		printf("%s\n%s\tli $v0, 10\n\tsyscall",
+		printf("\n%s\n%s\tli $v0, 10\n\tsyscall",
 	 	label,
 	 	$8.code);}
    ;
@@ -111,7 +111,7 @@ Statement:
 	| 	While_Statement {}
 	|   Do_While_Statement {}
 	|   ID '(' Args ')' ';' { create_cod(&$$.code); $$.place = $1;}
-	|	PRINT '(' Exp ')' ';' {}
+	|	PRINT '(' Exp ')' ';' {Print(&$$,$3);}
 	|   PRINTLN '(' Exp ')' ';' { Println(&$$,$3);}
 	|   ID '=' READ '(' ')' ';' { Read(&$$,$1);  }
 	;

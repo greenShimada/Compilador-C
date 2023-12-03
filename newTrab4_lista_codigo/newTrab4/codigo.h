@@ -111,7 +111,21 @@ char name_reg[10];
     sprintf(instrucao,"\tsyscall\n"); 
 	insert_cod(&Print->code,instrucao);
 }
+void Print(struct no *Print, struct no Exp) {
+// falta adaptar a lista de codigos		
+char name_reg[10];
+	create_cod(&Print->code);
+	getName(Exp.place,name_reg);
+	
+	sprintf(instrucao,"\tli $v0, 1\n");
+	insert_cod(&Print->code,instrucao);
+	
+	sprintf(instrucao,"\tmove $a0,%s\n", name_reg);
+	insert_cod(&Print->code,instrucao);
 
+	sprintf(instrucao,"\tsyscall\n");
+	insert_cod(&Print->code,instrucao);
+}
 void Read(struct no *Read_cmd, int reg) {
 // falta adaptar a lista de codigos		
 char name_reg[10];

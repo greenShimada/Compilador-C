@@ -1210,7 +1210,7 @@ yyreduce:
 		char label[10];
 		lblNumber = newLabel();
 		sprintf(label, "L%d:",lblNumber );
-		printf("%s\n%s\tli $v0, 10\n\tsyscall",
+		printf("\n%s\n%s\tli $v0, 10\n\tsyscall",
 	 	label,
 	 	(yyvsp[-1].node).code);}
 #line 1217 "mycomp.c"
@@ -1253,7 +1253,7 @@ yyreduce:
 
   case 29: /* Statement: PRINT '(' Exp ')' ';'  */
 #line 114 "mycomp.y"
-                                      {}
+                                      {Print(&(yyval.node),(yyvsp[-2].node));}
 #line 1258 "mycomp.c"
     break;
 
