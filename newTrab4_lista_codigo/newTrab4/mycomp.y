@@ -35,7 +35,7 @@
 
 %type <node> Exp Atribuicao Compound_Statement
 %type <node> Statement Statement_Seq If_Statement
-
+%type <node> While_Statement
 
 %start Prog
 %%
@@ -117,11 +117,11 @@ Statement:
 		Atribuicao
 	|	If_Statement 
 	| 	While_Statement {}
-	|   Do_While_Statement {}
+	|   Do_While_Statement {}  
 	|   ID '(' Args ')' ';' { 
 			create_cod(&$$.code); 
 			$$.place = $1;
-			sprintf(instrucao, "\tjal L%d\n", currentLabel());
+			sprintf(instrucao, "\tjal L%d\n", newLabel());
 			insert_cod(&$$.code, instrucao);
 			}
 	|	PRINT '(' Exp ')' ';' {Print(&$$,$3);}
@@ -144,7 +144,9 @@ If_Statement:
 	;
 		
 While_Statement:
-	  WHILE '(' Exp ')' Compound_Statement  
+	  WHILE '(' Exp ')' Compound_Statement {
+		While(&$$, $3, $5);
+		}
 	;
 
 Do_While_Statement:

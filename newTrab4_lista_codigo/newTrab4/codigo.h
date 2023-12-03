@@ -1,23 +1,14 @@
 #include "mycomp.h"
 #include "listacodigo.h"
-char instrucao[30];
+char instrucao[50];
 
 int temp=-1;
 int newTemp() {
 	return temp--;
 }
 
-int labelCounter = 1;
-int currentLabel(){
-	return labelCounter++;
-}
-void incrementCurrentLabel(){
-	labelCounter += 1;
-}
-
 int label = 0;
 int newLabel() {
-	incrementCurrentLabel();
 	return label++;
 }
 
@@ -206,5 +197,46 @@ int aux_label;
   
 }
 
+void While(struct no *While_cmd, struct no Exp, struct no Compound){
+	char reg_temp[10];
+	int aux_label;
+	aux_label = newLabel();
 
+	create_cod(&While_cmd->code);
+	sprintf(instrucao, "WHILE%d:\n", aux_label);
+	insert_cod(&While_cmd->code, instrucao);
+	insert_cod(&While_cmd->code, Exp.code);
+	getName(Exp.place, reg_temp);
 
+	newLabel();
+	sprintf(instrucao, "\tbeq %s, 0, END_WHILE%d\n", reg_temp, label);
+	insert_cod(&While_cmd->code, instrucao);
+	insert_cod(&While_cmd->code, Compound.code);
+	sprintf(instrucao, "j WHILE%d\n", aux_label);
+	insert_cod(&While_cmd->code, instrucao);
+	sprintf(instrucao, "END_WHILE%d:\n", label);
+	insert_cod(&While_cmd->code, instrucao);
+	
+}
+void DoWhile(struct no *DoWhile_cmd, struct no Exp, struct no Compound){
+	char reg_temp[10];
+	int aux_label;
+	newLabel();
+	int auxLabel = label;
+
+	create_cod(&DoWhile_cmd->code);
+	sprintf(instrucao, "L%d:", aux_label);
+	insert_cod(&DoWhile_cmd->code, instrucao);
+	insert_cod(&DoWhile_cmd->code, Exp.code);
+	insert_cod(&DoWhile_cmd->code, Compound.code);	
+	getName(Exp.place, reg_temp);
+
+	newLabel();
+	sprintf(instrucao, "\tbeq %s, 0, L%d\n", reg_temp, label);
+	insert_cod(&DoWhile_cmd->code, instrucao);
+
+	sprintf(instrucao, "j L%d\n", aux_label);
+	insert_cod(&DoWhile_cmd->code, instrucao);
+	sprintf(instrucao, "L%d:\n", label);
+	insert_cod(&DoWhile_cmd->code, instrucao);
+}

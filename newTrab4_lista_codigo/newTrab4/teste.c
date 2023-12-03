@@ -2,11 +2,15 @@
 cu() {
 	int a,b,c,aux;
     a = 1;
-	print(a);
 	t();
 	impossivel();
 	b = 4;
 	print(b);
+}
+impossivel(){
+		int p;
+		p = 3;
+		print(p);
 }
 t(){
 	int c;
@@ -14,8 +18,3 @@ t(){
 	print(c);
 }
 
-impossivel(){
-		int p;
-		p = 3;
-		print(p);
-}

@@ -544,9 +544,9 @@ static const yytype_uint8 yyrline[] =
        0,    42,    42,    43,    47,    66,    67,    71,    72,    76,
       77,    78,    82,    83,    87,    91,    92,    96,    97,   102,
      105,   111,   112,   113,   117,   118,   119,   120,   121,   127,
-     128,   129,   133,   137,   138,   142,   143,   147,   151,   154,
-     155,   156,   157,   158,   159,   160,   161,   162,   163,   164,
-     165,   166,   167,   168
+     128,   129,   133,   137,   138,   142,   143,   147,   153,   156,
+     157,   158,   159,   160,   161,   162,   163,   164,   165,   166,
+     167,   168,   169,   170
 };
 #endif
 
@@ -1257,7 +1257,7 @@ yyreduce:
                                 { 
 			create_cod(&(yyval.node).code); 
 			(yyval.node).place = (yyvsp[-4].place);
-			sprintf(instrucao, "\tjal L%d\n", currentLabel());
+			sprintf(instrucao, "\tjal L%d\n", newLabel());
 			insert_cod(&(yyval.node).code, instrucao);
 			}
 #line 1264 "mycomp.c"
@@ -1305,38 +1305,46 @@ yyreduce:
 #line 1306 "mycomp.c"
     break;
 
+  case 37: /* While_Statement: WHILE '(' Exp ')' Compound_Statement  */
+#line 147 "mycomp.y"
+                                               {
+		While(&(yyval.node), (yyvsp[-2].node), (yyvsp[0].node));
+		}
+#line 1314 "mycomp.c"
+    break;
+
   case 39: /* Exp: Exp '+' Exp  */
-#line 154 "mycomp.y"
+#line 156 "mycomp.y"
                    { ExpAri("add",&(yyval.node),(yyvsp[-2].node),(yyvsp[0].node)); }
-#line 1312 "mycomp.c"
+#line 1320 "mycomp.c"
     break;
 
   case 43: /* Exp: Exp '>' Exp  */
-#line 158 "mycomp.y"
+#line 160 "mycomp.y"
                        { ExpRel("bgt",&(yyval.node),(yyvsp[-2].node),(yyvsp[0].node));}
-#line 1318 "mycomp.c"
+#line 1326 "mycomp.c"
     break;
 
   case 51: /* Exp: '(' Exp ')'  */
-#line 166 "mycomp.y"
+#line 168 "mycomp.y"
                        { }
-#line 1324 "mycomp.c"
+#line 1332 "mycomp.c"
     break;
 
   case 52: /* Exp: NUM  */
-#line 167 "mycomp.y"
+#line 169 "mycomp.y"
                   {  (yyval.node).place = newTemp(); Li(&(yyval.node),(yyvsp[0].place)); }
-#line 1330 "mycomp.c"
+#line 1338 "mycomp.c"
     break;
 
   case 53: /* Exp: ID  */
-#line 168 "mycomp.y"
+#line 170 "mycomp.y"
                   {  create_cod(&(yyval.node).code); (yyval.node).place = (yyvsp[0].place);	}
-#line 1336 "mycomp.c"
+#line 1344 "mycomp.c"
     break;
 
 
-#line 1340 "mycomp.c"
+#line 1348 "mycomp.c"
 
       default: break;
     }
@@ -1529,7 +1537,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 171 "mycomp.y"
+#line 173 "mycomp.y"
   
 int main(int argc, char **argv) {   
   freopen("saida.asm","w",stdout);	
