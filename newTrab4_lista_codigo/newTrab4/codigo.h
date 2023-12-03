@@ -7,10 +7,20 @@ int newTemp() {
 	return temp--;
 }
 
+int labelCounter = 1;
+int currentLabel(){
+	return labelCounter;
+}
+void incrementCurrentLabel(){
+	labelCounter += 1;
+}
+
 int label = 0;
 int newLabel() {
+	incrementCurrentLabel();
 	return label++;
 }
+
 
 char reg1[5];
 char reg2[5];

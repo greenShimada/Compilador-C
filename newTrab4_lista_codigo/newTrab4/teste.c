@@ -1,14 +1,21 @@
 
-main() {
+cu() {
 	int a,b,c,aux;
-    a = 10;
-	b = 30;
+    a = 1;
 	print(a);
 	t();
+	impossivel();
+	b = 4;
 	print(b);
 }
 t(){
 	int c;
-	c = 20;
+	c = 2;
 	print(c);
+}
+
+impossivel(){
+		int p;
+		p = 3;
+		print(p);
 }

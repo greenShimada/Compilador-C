@@ -49,9 +49,17 @@ Funcao:
 		char label[10];
 		lblNumber = newLabel();
 		sprintf(label, "L%d:",lblNumber );
-		printf("\n%s\n%s\tli $v0, 10\n\tsyscall",
+		char nome[10];
+		
+		getName($2, nome);
+		if (strcmp(nome,"$s0") == 0) {
+			printf("\n%s\n%s\tli $v0, 10\n\tsyscall",
 	 	label,
 	 	$8.code);}
+		else
+			printf("\n%s\n%s\n\tjr $ra",label,$8.code);
+		}
+		
    ;
    
 Declps :
@@ -110,7 +118,12 @@ Statement:
 	|	If_Statement 
 	| 	While_Statement {}
 	|   Do_While_Statement {}
-	|   ID '(' Args ')' ';' { create_cod(&$$.code); $$.place = $1;}
+	|   ID '(' Args ')' ';' { 
+			create_cod(&$$.code); 
+			$$.place = $1;
+			sprintf(instrucao, "\tjal L%d\n", currentLabel());
+			insert_cod(&$$.code, instrucao);
+			}
 	|	PRINT '(' Exp ')' ';' {Print(&$$,$3);}
 	|   PRINTLN '(' Exp ')' ';' { Println(&$$,$3);}
 	|   ID '=' READ '(' ')' ';' { Read(&$$,$1);  }
