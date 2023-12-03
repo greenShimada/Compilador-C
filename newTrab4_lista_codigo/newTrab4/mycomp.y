@@ -33,7 +33,9 @@
 %left '+' '-'
 %left '*' '/'
 
-%type <node> Exp Atribuicao
+%type <node> Exp Atribuicao Compound_Statement
+%type <node> Statement Statement_Seq If_Statement
+%type <node> Funcao
 
 %start Prog
 %%
@@ -42,7 +44,7 @@ Prog : Funcao
 	;
 	
 Funcao:
-    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}' 
+    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { FunctionCall(&$$, $3, $6)}
    ;
    
 Declps :
@@ -82,8 +84,13 @@ Tipo :
 			
 	
 Statement_Seq:
-	Statement				   
-	| Statement_Seq Statement  
+	Statement				   { create_cod(&$$.code); 
+								 insert_cod(&$$.code,$1.code);
+							   }
+	| Statement_Seq Statement  { create_cod(&$$.code); 
+								 insert_cod(&$$.code,$1.code); 
+								 insert_cod(&$$.code,$2.code);	
+						       }
     
 Args:
 	  Exp ',' Args
@@ -93,31 +100,27 @@ Args:
 		
 Statement: 
 		Atribuicao
-	|	If_Statement
-	| 	While_Statement
-	|   Do_While_Statement
-	|   ID '(' Args ')' ';'
-	|	PRINT '(' Exp ')' ';'  { Print(&$3);}
-	|   PRINTLN '(' Exp ')' ';' { Println(&$3);}
-	|   ID '=' READ '(' ')' ';' { /* Read($1); */ }
+	|	If_Statement 
+	| 	While_Statement {}
+	|   Do_While_Statement {}
+	|   ID '(' Args ')' ';' {}
+	|	PRINT '(' Exp ')' ';' {}
+	|   PRINTLN '(' Exp ')' ';' { Println(&$$,$3);}
+	|   ID '=' READ '(' ')' ';' { Read(&$$,$1);  }
 	;
 	
 	
-Atribuicao : ID '=' Exp ';'  { Atrib(&$$,$1,$3); printf("%s", $$.code);}
+Atribuicao : ID '=' Exp ';'  { Atrib(&$$,$1,$3); }
 	;
 
 Compound_Statement :
 	  Statement
-	| '{' Statement_Seq '}'
+	| '{' Statement_Seq '}' {$$ = $2;}
 	;
 	
 If_Statement:
-	  IF '(' Exp ')' Compound_Statement Else_Part
-	;
-		
-Else_Part:
-	  ELSE Compound_Statement
-	|
+	  IF '(' Exp ')' Compound_Statement { If(&$$,$3,$5); }
+	| IF '(' Exp ')' Compound_Statement ELSE Compound_Statement  { IfElse(&$$,$3,$5,$7); }
 	;
 		
 While_Statement:
@@ -128,11 +131,11 @@ Do_While_Statement:
 	  DO Compound_Statement WHILE '(' Exp ')' ';'   
 	;
 			
-Exp : Exp '+' Exp  { /* $$ = newTemp(); ExpAri("add",$$,$1,$3); */}
+Exp : Exp '+' Exp  { ExpAri("add",&$$,$1,$3); }
 	| Exp '-' Exp  
 	| Exp '*' Exp  
 	| Exp '/' Exp  
-	| Exp '>' Exp 
+	| Exp '>' Exp  { ExpRel("bgt",&$$,$1,$3);} 
 	| Exp '<' Exp  
 	| Exp GE Exp   
 	| Exp LE Exp   
@@ -141,9 +144,8 @@ Exp : Exp '+' Exp  { /* $$ = newTemp(); ExpAri("add",$$,$1,$3); */}
 	| Exp AND Exp  
 	| Exp OR Exp   
 	| '(' Exp ')'  { }
-	| NUM	  {  $$.place = newTemp(); Li(&$$,$1); } 
-				 		   
-	| ID      {    }     
+	| NUM	  {  $$.place = newTemp(); Li(&$$,$1); } 				 		   
+	| ID      {  create_cod(&$$.code); $$.place = $1;	}     
 	;   
 	
 %%  
@@ -152,6 +154,7 @@ int main(int argc, char **argv) {
   printf(".text\n");
   yyin = fopen(argv[1],"r");
   yyparse();
+    
 } 
 
 

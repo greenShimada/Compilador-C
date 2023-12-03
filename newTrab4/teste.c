@@ -1,5 +1,0 @@
-main() {
-	int a;
-	a = 30;
-	print(a);
-}

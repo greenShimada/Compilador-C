@@ -1,13 +1,13 @@
 char instrucao[30];
 
-/************  Funï¿½ï¿½es para manipulacao de  strings ****************/
-// cria um cï¿½digo vazio
-int create_cod(char **codigo) {
+/************  Funções para manipulacao de  strings ****************/
+// cria um código vazio
+create_cod(char **codigo) {
   *codigo = (char *) malloc(1);
   strcpy(*codigo,"");
 }
-// insere uma instruï¿½ï¿½o a uma lista de instruï¿½ï¿½es ja existente
-int insert_cod(char **codigo, char *instrucao) {
+// insere uma instrução a uma lista de instruções ja existente
+insert_cod(char **codigo, char *instrucao) {
 char *aux;
   aux = *codigo;
   *codigo = (char *) malloc(strlen(*codigo)+strlen(instrucao)+2);
@@ -16,7 +16,7 @@ char *aux;
   free(aux);
 }
 // imprime codigo na tela
-int print_cod(char *codigo) {
+print_cod(char *codigo) {
   printf("%s",codigo);
 }
 /*******************************************************************/
