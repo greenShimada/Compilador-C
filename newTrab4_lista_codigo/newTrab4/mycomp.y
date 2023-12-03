@@ -45,11 +45,10 @@ Prog : Funcao
 	
 Funcao:
     Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { 
-		int lblNumber;
+		unsigned short int lblNumber;
 		char label[10];
 		lblNumber = newLabel();
 		sprintf(label, "L%d:",lblNumber );
-		
 		printf("%s\n%s\tli $v0, 10\n\tsyscall",
 	 	label,
 	 	$8.code);}
@@ -111,7 +110,7 @@ Statement:
 	|	If_Statement 
 	| 	While_Statement {}
 	|   Do_While_Statement {}
-	|   ID '(' Args ')' ';' {}
+	|   ID '(' Args ')' ';' { create_cod(&$$.code); $$.place = $1;}
 	|	PRINT '(' Exp ')' ';' {}
 	|   PRINTLN '(' Exp ')' ';' { Println(&$$,$3);}
 	|   ID '=' READ '(' ')' ';' { Read(&$$,$1);  }
