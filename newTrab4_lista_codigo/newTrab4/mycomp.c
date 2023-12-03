@@ -1209,7 +1209,7 @@ yyreduce:
 		unsigned short int lblNumber;
 		char label[10];
 		lblNumber = newLabel();
-		sprintf(label, "L%d:",lblNumber );
+		sprintf(label, "L%d:", (yyvsp[-7].place));
 		char nome[10];
 		
 		getName((yyvsp[-7].place), nome);
@@ -1257,7 +1257,7 @@ yyreduce:
                                 { 
 			create_cod(&(yyval.node).code); 
 			(yyval.node).place = (yyvsp[-4].place);
-			sprintf(instrucao, "\tjal L%d\n", newLabel());
+			sprintf(instrucao, "\tjal L%d\n", (yyval.node).place);
 			insert_cod(&(yyval.node).code, instrucao);
 			}
 #line 1264 "mycomp.c"

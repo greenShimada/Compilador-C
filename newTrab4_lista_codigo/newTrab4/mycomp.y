@@ -48,7 +48,7 @@ Funcao:
 		unsigned short int lblNumber;
 		char label[10];
 		lblNumber = newLabel();
-		sprintf(label, "L%d:",lblNumber );
+		sprintf(label, "L%d:", $2);
 		char nome[10];
 		
 		getName($2, nome);
@@ -121,7 +121,7 @@ Statement:
 	|   ID '(' Args ')' ';' { 
 			create_cod(&$$.code); 
 			$$.place = $1;
-			sprintf(instrucao, "\tjal L%d\n", newLabel());
+			sprintf(instrucao, "\tjal L%d\n", $$.place);
 			insert_cod(&$$.code, instrucao);
 			}
 	|	PRINT '(' Exp ')' ';' {Print(&$$,$3);}

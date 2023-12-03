@@ -1,9 +1,14 @@
 
-cu() {
+main() {
 	int a,b,c,aux;
     a = 1;
 	t();
 	impossivel();
+	t();
+	t();
+	t();
+	t();
+	t();
 	b = 4;
 	print(b);
 }

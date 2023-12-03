@@ -1,12 +1,17 @@
-cu()
+main()
 {
     int a,b;
     a = 11;
     b = 5;
-    funciona();
+    teste();
+    while(a>b){
+        println(b);
+        b = b+1;
+    }
+    teste();
 }
-funciona()
-{
-    int a = 10;
-    print (a);
+teste(){
+    int t;
+    t = 68;
+    println(t);
 }
