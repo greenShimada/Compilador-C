@@ -3,6 +3,7 @@ flex -o analex.c analex.l &&
 yacc -o mycomp.c mycomp.y -d &&
 gcc mycomp.c -o mycomp.exe &&
 ./mycomp.exe teste.c &&
-echo "Saída do MARS:"  
+echo "Saída do MARS:"   &&
+java -jar Mars.jar saida.asm
 
 

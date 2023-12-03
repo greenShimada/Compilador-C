@@ -9,7 +9,7 @@ int newTemp() {
 
 int labelCounter = 1;
 int currentLabel(){
-	return labelCounter;
+	return labelCounter++;
 }
 void incrementCurrentLabel(){
 	labelCounter += 1;
