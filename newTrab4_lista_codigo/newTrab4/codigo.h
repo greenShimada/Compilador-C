@@ -225,10 +225,11 @@ void DoWhile(struct no *DoWhile_cmd, struct no Exp, struct no Compound){
 	int auxLabel = label;
 
 	create_cod(&DoWhile_cmd->code);
-	sprintf(instrucao, "L%d:", aux_label);
+	sprintf(instrucao, "L%d:\n", aux_label);
 	insert_cod(&DoWhile_cmd->code, instrucao);
+
+	insert_cod(&DoWhile_cmd->code, Compound.code);
 	insert_cod(&DoWhile_cmd->code, Exp.code);
-	insert_cod(&DoWhile_cmd->code, Compound.code);	
 	getName(Exp.place, reg_temp);
 
 	newLabel();
