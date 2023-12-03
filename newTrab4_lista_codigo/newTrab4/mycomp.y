@@ -44,7 +44,15 @@ Prog : Funcao
 	;
 	
 Funcao:
-    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { printf("%s", $8.code);}
+    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { 
+		int lblNumber;
+		char label[10];
+		lblNumber = newLabel();
+		sprintf(label, "L%d:",lblNumber );
+		
+		printf("%s\n%s\tli $v0, 10\n\tsyscall",
+	 	label,
+	 	$8.code);}
    ;
    
 Declps :
