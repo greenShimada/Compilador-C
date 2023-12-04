@@ -35,7 +35,7 @@
 
 %type <node> Exp Atribuicao Compound_Statement
 %type <node> Statement Statement_Seq If_Statement
-%type <node> While_Statement
+%type <node> While_Statement Ldeclps
 
 %start Prog
 %%
@@ -68,7 +68,8 @@ Declps :
 	;
 	
 Ldeclps :
-	  Tipo ID  
+	  Tipo ID  {	ArgAtrib(&$$, $2); }
+
 	| Ldeclps ',' Tipo ID 
 	;
      

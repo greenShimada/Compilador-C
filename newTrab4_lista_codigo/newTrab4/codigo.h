@@ -7,6 +7,14 @@ int newTemp() {
 	return temp--;
 }
 
+int argNumber = 0;
+int returnArgNumber(){
+	if (argNumber < 3){
+		return argNumber++;
+	}
+	
+}
+
 int label = 0;
 int newLabel() {
 	return label++;
@@ -16,6 +24,7 @@ int newLabel() {
 char reg1[5];
 char reg2[5];
 char reg_temp[5];
+
 void getName(int num, char *name) {
   if (num >= 0 ) {
     sprintf(name,"$s%d",num);
@@ -23,7 +32,18 @@ void getName(int num, char *name) {
   else 
     sprintf(name,"$t%d",-(num+1));
 }
+void ArgAtrib(struct no *Arg, int regOrig){
+	char name_dest[5];
+	char name_orig[5];
 
+	int a_number  = returnArgNumber();
+	getName(regOrig,name_orig);
+	sprintf(name_dest, "$a%d", a_number);
+	create_cod(&Arg->code);
+	sprintf(instrucao, "\tmove %s,%s\n", name_dest, name_orig);
+	insert_cod(&Arg->code, instrucao);
+
+}
 /* modificado */
 void Atrib(struct no *Atrib, int $1, struct no $3) {
 char name_dest[5];

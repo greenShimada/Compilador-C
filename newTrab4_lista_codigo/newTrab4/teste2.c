@@ -1,17 +1,10 @@
 main()
 {
-    int a,b;
-    a = 11;
-    b = 5;
-    teste();
-    while(a>b){
-        println(b);
-        b = b+1;
-    }
-    teste();
+    int  arg1, arg2;
+    arg1 = 11;
+    teste(arg1);
+   
 }
-teste(){
-    int t;
-    t = 68;
-    println(t);
+teste(int a){
+     print(a);
 }

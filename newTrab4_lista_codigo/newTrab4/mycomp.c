@@ -541,12 +541,12 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    42,    42,    43,    47,    66,    67,    71,    72,    76,
-      77,    78,    82,    83,    87,    91,    92,    96,    97,   102,
-     105,   111,   112,   113,   117,   118,   119,   120,   121,   127,
-     128,   129,   133,   137,   138,   142,   143,   147,   153,   156,
-     157,   158,   159,   160,   161,   162,   163,   164,   165,   166,
-     167,   168,   169,   170
+       0,    42,    42,    43,    47,    66,    67,    71,    76,    80,
+      81,    82,    86,    87,    91,    95,    96,   100,   101,   106,
+     109,   115,   116,   117,   121,   122,   123,   124,   125,   131,
+     132,   133,   137,   141,   142,   146,   147,   151,   157,   160,
+     161,   162,   163,   164,   165,   166,   167,   168,   169,   170,
+     171,   172,   173,   174
 };
 #endif
 
@@ -1223,128 +1223,138 @@ yyreduce:
 #line 1224 "mycomp.c"
     break;
 
+  case 7: /* Ldeclps: Tipo ID  */
+#line 71 "mycomp.y"
+                   {
+		
+		ArgAtrib(&(yyval.node), (yyvsp[0].place));
+
+	  }
+#line 1234 "mycomp.c"
+    break;
+
   case 19: /* Statement_Seq: Statement  */
-#line 102 "mycomp.y"
+#line 106 "mycomp.y"
                                                    { create_cod(&(yyval.node).code); 
 								 insert_cod(&(yyval.node).code,(yyvsp[0].node).code);
 							   }
-#line 1232 "mycomp.c"
+#line 1242 "mycomp.c"
     break;
 
   case 20: /* Statement_Seq: Statement_Seq Statement  */
-#line 105 "mycomp.y"
+#line 109 "mycomp.y"
                                    { create_cod(&(yyval.node).code); 
 								 insert_cod(&(yyval.node).code,(yyvsp[-1].node).code); 
 								 insert_cod(&(yyval.node).code,(yyvsp[0].node).code);	
 						       }
-#line 1241 "mycomp.c"
+#line 1251 "mycomp.c"
     break;
 
   case 26: /* Statement: While_Statement  */
-#line 119 "mycomp.y"
+#line 123 "mycomp.y"
                                 {}
-#line 1247 "mycomp.c"
+#line 1257 "mycomp.c"
     break;
 
   case 27: /* Statement: Do_While_Statement  */
-#line 120 "mycomp.y"
+#line 124 "mycomp.y"
                                {}
-#line 1253 "mycomp.c"
+#line 1263 "mycomp.c"
     break;
 
   case 28: /* Statement: ID '(' Args ')' ';'  */
-#line 121 "mycomp.y"
+#line 125 "mycomp.y"
                                 { 
 			create_cod(&(yyval.node).code); 
 			(yyval.node).place = (yyvsp[-4].place);
 			sprintf(instrucao, "\tjal L%d\n", (yyval.node).place);
 			insert_cod(&(yyval.node).code, instrucao);
 			}
-#line 1264 "mycomp.c"
+#line 1274 "mycomp.c"
     break;
 
   case 29: /* Statement: PRINT '(' Exp ')' ';'  */
-#line 127 "mycomp.y"
+#line 131 "mycomp.y"
                                       {Print(&(yyval.node),(yyvsp[-2].node));}
-#line 1270 "mycomp.c"
+#line 1280 "mycomp.c"
     break;
 
   case 30: /* Statement: PRINTLN '(' Exp ')' ';'  */
-#line 128 "mycomp.y"
+#line 132 "mycomp.y"
                                     { Println(&(yyval.node),(yyvsp[-2].node));}
-#line 1276 "mycomp.c"
+#line 1286 "mycomp.c"
     break;
 
   case 31: /* Statement: ID '=' READ '(' ')' ';'  */
-#line 129 "mycomp.y"
+#line 133 "mycomp.y"
                                     { Read(&(yyval.node),(yyvsp[-5].place));  }
-#line 1282 "mycomp.c"
+#line 1292 "mycomp.c"
     break;
 
   case 32: /* Atribuicao: ID '=' Exp ';'  */
-#line 133 "mycomp.y"
+#line 137 "mycomp.y"
                              { Atrib(&(yyval.node),(yyvsp[-3].place),(yyvsp[-1].node)); }
-#line 1288 "mycomp.c"
+#line 1298 "mycomp.c"
     break;
 
   case 34: /* Compound_Statement: '{' Statement_Seq '}'  */
-#line 138 "mycomp.y"
+#line 142 "mycomp.y"
                                 {(yyval.node) = (yyvsp[-1].node);}
-#line 1294 "mycomp.c"
+#line 1304 "mycomp.c"
     break;
 
   case 35: /* If_Statement: IF '(' Exp ')' Compound_Statement  */
-#line 142 "mycomp.y"
+#line 146 "mycomp.y"
                                             { If(&(yyval.node),(yyvsp[-2].node),(yyvsp[0].node)); }
-#line 1300 "mycomp.c"
+#line 1310 "mycomp.c"
     break;
 
   case 36: /* If_Statement: IF '(' Exp ')' Compound_Statement ELSE Compound_Statement  */
-#line 143 "mycomp.y"
+#line 147 "mycomp.y"
                                                                      { IfElse(&(yyval.node),(yyvsp[-4].node),(yyvsp[-2].node),(yyvsp[0].node)); }
-#line 1306 "mycomp.c"
+#line 1316 "mycomp.c"
     break;
 
   case 37: /* While_Statement: WHILE '(' Exp ')' Compound_Statement  */
-#line 147 "mycomp.y"
+#line 151 "mycomp.y"
                                                {
 		While(&(yyval.node), (yyvsp[-2].node), (yyvsp[0].node));
 		}
-#line 1314 "mycomp.c"
+#line 1324 "mycomp.c"
     break;
 
   case 39: /* Exp: Exp '+' Exp  */
-#line 156 "mycomp.y"
+#line 160 "mycomp.y"
                    { ExpAri("add",&(yyval.node),(yyvsp[-2].node),(yyvsp[0].node)); }
-#line 1320 "mycomp.c"
+#line 1330 "mycomp.c"
     break;
 
   case 43: /* Exp: Exp '>' Exp  */
-#line 160 "mycomp.y"
+#line 164 "mycomp.y"
                        { ExpRel("bgt",&(yyval.node),(yyvsp[-2].node),(yyvsp[0].node));}
-#line 1326 "mycomp.c"
+#line 1336 "mycomp.c"
     break;
 
   case 51: /* Exp: '(' Exp ')'  */
-#line 168 "mycomp.y"
+#line 172 "mycomp.y"
                        { }
-#line 1332 "mycomp.c"
+#line 1342 "mycomp.c"
     break;
 
   case 52: /* Exp: NUM  */
-#line 169 "mycomp.y"
+#line 173 "mycomp.y"
                   {  (yyval.node).place = newTemp(); Li(&(yyval.node),(yyvsp[0].place)); }
-#line 1338 "mycomp.c"
+#line 1348 "mycomp.c"
     break;
 
   case 53: /* Exp: ID  */
-#line 170 "mycomp.y"
+#line 174 "mycomp.y"
                   {  create_cod(&(yyval.node).code); (yyval.node).place = (yyvsp[0].place);	}
-#line 1344 "mycomp.c"
+#line 1354 "mycomp.c"
     break;
 
 
-#line 1348 "mycomp.c"
+#line 1358 "mycomp.c"
 
       default: break;
     }
@@ -1537,7 +1547,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 173 "mycomp.y"
+#line 177 "mycomp.y"
   
 int main(int argc, char **argv) {   
   freopen("saida.asm","w",stdout);	
