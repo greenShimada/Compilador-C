@@ -35,7 +35,7 @@
 
 %type <node> Exp Atribuicao Compound_Statement
 %type <node> Statement Statement_Seq If_Statement
-%type <node> While_Statement Ldeclps
+%type <node> While_Statement Ldeclps Funcao
 
 %start Prog
 %%
@@ -44,21 +44,8 @@ Prog : Funcao
 	;
 	
 Funcao:
-    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { 
-		unsigned short int lblNumber;
-		char label[10];
-		lblNumber = newLabel();
-		sprintf(label, "L%d:", $2);
-		char nome[10];
+    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { Funcao (&$$, $2, $8); }
 		
-		getName($2, nome);
-		if (strcmp(nome,"$s0") == 0) {
-			printf("\n%s\n%s\tli $v0, 10\n\tsyscall",
-	 	label,
-	 	$8.code);}
-		else
-			printf("\n%s\n%s\n\tjr $ra",label,$8.code);
-		}
 		
    ;
    
@@ -119,12 +106,7 @@ Statement:
 	|	If_Statement 
 	| 	While_Statement {}
 	|   Do_While_Statement {}  
-	|   ID '(' Args ')' ';' { 
-			create_cod(&$$.code); 
-			$$.place = $1;
-			sprintf(instrucao, "\tjal L%d\n", $$.place);
-			insert_cod(&$$.code, instrucao);
-			}
+	|   ID '(' Args ')' ';' { FuncCall(&$$, $1);  }
 	|	PRINT '(' Exp ')' ';' {Print(&$$,$3);}
 	|   PRINTLN '(' Exp ')' ';' { Println(&$$,$3);}
 	|   ID '=' READ '(' ')' ';' { Read(&$$,$1);  }

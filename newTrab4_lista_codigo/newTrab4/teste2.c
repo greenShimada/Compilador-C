@@ -5,6 +5,8 @@ main()
     teste(arg1);
    
 }
-teste(int a){
+teste(){
+     int a;
+     a = 10;
      print(a);
 }

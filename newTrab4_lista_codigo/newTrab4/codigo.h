@@ -24,6 +24,30 @@ int newLabel() {
 char reg1[5];
 char reg2[5];
 char reg_temp[5];
+void FuncCall(struct no *$$, int $1){
+	create_cod(&$$->code); 
+	$$->place = $1;
+	sprintf(instrucao, "\tjal L%d\n", $$->place);
+	insert_cod(&$$->code, instrucao);
+}
+
+void Funcao(struct no *Func, int $2, struct no $8){
+	unsigned short int lblNumber;
+	char label[10];
+	lblNumber = newLabel();
+	sprintf(label, "L%d:", $2);
+	char nome[10];
+	
+	getName($2, nome);
+	if (strcmp(nome,"$s0") == 0) {
+		
+		printf("\n%s\n%s\tli $v0, 10\n\tsyscall",
+	label,
+	$8.code);}
+	else{
+		printf("\n%s\n%s\n\tjr $ra",label,$8.code);
+	}
+}
 
 void getName(int num, char *name) {
   if (num >= 0 ) {
