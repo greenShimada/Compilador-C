@@ -35,7 +35,7 @@
 
 %type <node> Exp Atribuicao Compound_Statement
 %type <node> Statement Statement_Seq If_Statement
-%type <node> While_Statement Ldeclps Funcao
+%type <node> While_Statement Ldeclps Funcao Declps
 
 %start Prog
 %%
@@ -44,19 +44,18 @@ Prog : Funcao
 	;
 	
 Funcao:
-    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { Funcao (&$$, $2, $8); }
+    Tipo_f ID '(' Declps ')' '{' Decls Statement_Seq '}'  { Funcao (&$$, $2,$4, $8); }
 		
 		
    ;
    
 Declps :
-	Ldeclps
+	Ldeclps {$$ = $1;}
 	|
 	;
 	
 Ldeclps :
-	  Tipo ID  {	ArgAtrib(&$$, $2); }
-
+	  Tipo ID  {	$$.place = $2; }
 	| Ldeclps ',' Tipo ID 
 	;
      
@@ -67,7 +66,7 @@ Tipo_f :
 	;
 
 Decls :
-	Decl Decls
+	Decl Decls 
 	|
 	;
 	

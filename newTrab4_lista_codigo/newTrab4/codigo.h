@@ -31,7 +31,7 @@ void FuncCall(struct no *$$, int $1){
 	insert_cod(&$$->code, instrucao);
 }
 
-void Funcao(struct no *Func, int $2, struct no $8){
+void Funcao(struct no *Func, int $2, struct no $4, struct no $8){
 	unsigned short int lblNumber;
 	char label[10];
 	lblNumber = newLabel();
@@ -45,7 +45,10 @@ void Funcao(struct no *Func, int $2, struct no $8){
 	label,
 	$8.code);}
 	else{
-		printf("\n%s\n%s\n\tjr $ra",label,$8.code);
+		char move[20];
+		int arg = returnArgNumber();
+		sprintf(move, "\tmove $a%d,$s%d", arg, $4.place + 1);
+		printf("\n%s\n%s\n%s\n\tjr $ra",label, move,$8.code);
 	}
 }
 
@@ -56,18 +59,7 @@ void getName(int num, char *name) {
   else 
     sprintf(name,"$t%d",-(num+1));
 }
-void ArgAtrib(struct no *Arg, int regOrig){
-	char name_dest[5];
-	char name_orig[5];
 
-	int a_number  = returnArgNumber();
-	getName(regOrig,name_orig);
-	sprintf(name_dest, "$a%d", a_number);
-	create_cod(&Arg->code);
-	sprintf(instrucao, "\tmove %s,%s\n", name_dest, name_orig);
-	insert_cod(&Arg->code, instrucao);
-
-}
 /* modificado */
 void Atrib(struct no *Atrib, int $1, struct no $3) {
 char name_dest[5];
